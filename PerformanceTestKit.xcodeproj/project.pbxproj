@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49A2102D1F1188150046778F /* PerformanceLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A2102C1F1188150046778F /* PerformanceLog.swift */; };
+		49A2102E1F1188150046778F /* PerformanceLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A2102C1F1188150046778F /* PerformanceLog.swift */; };
+		49A210311F1188AE0046778F /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A210301F1188AE0046778F /* Task.swift */; };
+		49A210321F1188AE0046778F /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A210301F1188AE0046778F /* Task.swift */; };
+		49A210341F1189600046778F /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A210331F1189600046778F /* Report.swift */; };
+		49A210351F1189600046778F /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A210331F1189600046778F /* Report.swift */; };
 		49A816FE1F117F57000104B4 /* PerformanceTestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49A816F41F117F57000104B4 /* PerformanceTestKit.framework */; };
-		49A817031F117F57000104B4 /* PerformanceTestKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A817021F117F57000104B4 /* PerformanceTestKitTests.swift */; };
-		49A817051F117F57000104B4 /* PerformanceTestKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 49A816F71F117F57000104B4 /* PerformanceTestKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49E55CF91F1186AC006EAD66 /* PerformanceTestKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 49E55CF81F1186AC006EAD66 /* PerformanceTestKit.h */; };
+		49E55CFB1F1186D5006EAD66 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49E55CFA1F1186D5006EAD66 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,12 +29,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		49A2102B1F1188150046778F /* PerformanceTestKitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "PerformanceTestKitTests-Bridging-Header.h"; path = "../PerformanceTestKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		49A2102C1F1188150046778F /* PerformanceLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceLog.swift; sourceTree = "<group>"; };
+		49A2102F1F1188550046778F /* Macros-ObjectiveC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Macros-ObjectiveC.h"; sourceTree = "<group>"; };
+		49A210301F1188AE0046778F /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		49A210331F1189600046778F /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		49A816F41F117F57000104B4 /* PerformanceTestKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PerformanceTestKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		49A816F71F117F57000104B4 /* PerformanceTestKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerformanceTestKit.h; sourceTree = "<group>"; };
-		49A816F81F117F57000104B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49A816FD1F117F57000104B4 /* PerformanceTestKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PerformanceTestKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		49A817021F117F57000104B4 /* PerformanceTestKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTestKitTests.swift; sourceTree = "<group>"; };
-		49A817041F117F57000104B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49E55CF81F1186AC006EAD66 /* PerformanceTestKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerformanceTestKit.h; sourceTree = "<group>"; };
+		49E55CFA1F1186D5006EAD66 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,9 +62,12 @@
 		49A816EA1F117F57000104B4 = {
 			isa = PBXGroup;
 			children = (
-				49A816F61F117F57000104B4 /* PerformanceTestKit */,
-				49A817011F117F57000104B4 /* PerformanceTestKitTests */,
+				49E55CF11F1185ED006EAD66 /* Sources */,
+				49E55CF21F1185F2006EAD66 /* Tests */,
+				49E55CF31F1185F6006EAD66 /* Configuration */,
+				49E55CF41F1185FB006EAD66 /* Frameworks */,
 				49A816F51F117F57000104B4 /* Products */,
+				49E55CF51F11861C006EAD66 /* Docs */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,25 +77,66 @@
 				49A816F41F117F57000104B4 /* PerformanceTestKit.framework */,
 				49A816FD1F117F57000104B4 /* PerformanceTestKitTests.xctest */,
 			);
-			name = Products;
+			path = Products;
 			sourceTree = "<group>";
 		};
-		49A816F61F117F57000104B4 /* PerformanceTestKit */ = {
+		49E55CF11F1185ED006EAD66 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				49A816F71F117F57000104B4 /* PerformanceTestKit.h */,
-				49A816F81F117F57000104B4 /* Info.plist */,
+				49A210301F1188AE0046778F /* Task.swift */,
+				49A210331F1189600046778F /* Report.swift */,
+				49A2102C1F1188150046778F /* PerformanceLog.swift */,
+				49E55CF81F1186AC006EAD66 /* PerformanceTestKit.h */,
+				49E55CF71F11869F006EAD66 /* Assets */,
+				49E55CF61F118697006EAD66 /* Supporting Files */,
+				49A2102F1F1188550046778F /* Macros-ObjectiveC.h */,
 			);
-			path = PerformanceTestKit;
+			path = Sources;
 			sourceTree = "<group>";
 		};
-		49A817011F117F57000104B4 /* PerformanceTestKitTests */ = {
+		49E55CF21F1185F2006EAD66 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				49A817021F117F57000104B4 /* PerformanceTestKitTests.swift */,
-				49A817041F117F57000104B4 /* Info.plist */,
 			);
-			path = PerformanceTestKitTests;
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		49E55CF31F1185F6006EAD66 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		49E55CF41F1185FB006EAD66 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			path = Products;
+			sourceTree = "<group>";
+		};
+		49E55CF51F11861C006EAD66 /* Docs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Docs;
+			sourceTree = "<group>";
+		};
+		49E55CF61F118697006EAD66 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				49A2102B1F1188150046778F /* PerformanceTestKitTests-Bridging-Header.h */,
+				49E55CFA1F1186D5006EAD66 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		49E55CF71F11869F006EAD66 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -93,7 +146,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49A817051F117F57000104B4 /* PerformanceTestKit.h in Headers */,
+				49E55CF91F1186AC006EAD66 /* PerformanceTestKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,9 +201,11 @@
 				TargetAttributes = {
 					49A816F31F117F57000104B4 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0820;
 					};
 					49A816FC1F117F57000104B4 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -177,6 +232,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49E55CFB1F1186D5006EAD66 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +250,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49A210311F1188AE0046778F /* Task.swift in Sources */,
+				49A2102D1F1188150046778F /* PerformanceLog.swift in Sources */,
+				49A210341F1189600046778F /* Report.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +260,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49A817031F117F57000104B4 /* PerformanceTestKitTests.swift in Sources */,
+				49A210321F1188AE0046778F /* Task.swift in Sources */,
+				49A2102E1F1188150046778F /* PerformanceLog.swift in Sources */,
+				49A210351F1189600046778F /* Report.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,18 +389,20 @@
 		49A817091F117F57000104B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = VLV5W8FP9W;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = PerformanceTestKit/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lucasstomberg.PerformanceTestKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -348,13 +411,14 @@
 		49A8170A1F117F57000104B4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = VLV5W8FP9W;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = PerformanceTestKit/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lucasstomberg.PerformanceTestKit;
@@ -368,11 +432,15 @@
 		49A8170C1F117F57000104B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = VLV5W8FP9W;
-				INFOPLIST_FILE = PerformanceTestKitTests/Info.plist;
+				INFOPLIST_FILE = "Tests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lucasstomberg.PerformanceTestKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/PerformanceTestKitTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -381,11 +449,14 @@
 		49A8170D1F117F57000104B4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = VLV5W8FP9W;
-				INFOPLIST_FILE = PerformanceTestKitTests/Info.plist;
+				INFOPLIST_FILE = "Tests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lucasstomberg.PerformanceTestKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/PerformanceTestKitTests-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -410,6 +481,7 @@
 				49A8170A1F117F57000104B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		49A8170B1F117F57000104B4 /* Build configuration list for PBXNativeTarget "PerformanceTestKitTests" */ = {
 			isa = XCConfigurationList;
@@ -418,6 +490,7 @@
 				49A8170D1F117F57000104B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
