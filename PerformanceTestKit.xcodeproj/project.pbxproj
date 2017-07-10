@@ -14,8 +14,6 @@
 		49A210341F1189600046778F /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A210331F1189600046778F /* Report.swift */; };
 		49A210351F1189600046778F /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A210331F1189600046778F /* Report.swift */; };
 		49A816FE1F117F57000104B4 /* PerformanceTestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49A816F41F117F57000104B4 /* PerformanceTestKit.framework */; };
-		49E55CF91F1186AC006EAD66 /* PerformanceTestKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 49E55CF81F1186AC006EAD66 /* PerformanceTestKit.h */; };
-		49E55CFB1F1186D5006EAD66 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49E55CFA1F1186D5006EAD66 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,7 +27,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		49A2102B1F1188150046778F /* PerformanceTestKitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "PerformanceTestKitTests-Bridging-Header.h"; path = "../PerformanceTestKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		49A2102C1F1188150046778F /* PerformanceLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceLog.swift; sourceTree = "<group>"; };
 		49A2102F1F1188550046778F /* Macros-ObjectiveC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Macros-ObjectiveC.h"; sourceTree = "<group>"; };
 		49A210301F1188AE0046778F /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
@@ -126,7 +123,6 @@
 		49E55CF61F118697006EAD66 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				49A2102B1F1188150046778F /* PerformanceTestKitTests-Bridging-Header.h */,
 				49E55CFA1F1186D5006EAD66 /* Info.plist */,
 			);
 			path = "Supporting Files";
@@ -146,7 +142,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49E55CF91F1186AC006EAD66 /* PerformanceTestKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +227,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49E55CFB1F1186D5006EAD66 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
