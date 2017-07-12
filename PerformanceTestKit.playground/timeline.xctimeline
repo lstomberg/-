@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Timeline
+   version = "3.0">
+   <TimelineItems>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/lstomber/Documents/Development/GitHub/swift-PerformanceTestKit/PerformanceTestKit.playground#CharacterRangeLen=447&amp;CharacterRangeLoc=2231&amp;EndingColumnNumber=0&amp;EndingLineNumber=99&amp;StartingColumnNumber=0&amp;StartingLineNumber=87&amp;Timestamp=521416964.480823"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/lstomber/Documents/Development/GitHub/swift-PerformanceTestKit/PerformanceTestKit.playground#CharacterRangeLen=251&amp;CharacterRangeLoc=2427&amp;EndingColumnNumber=0&amp;EndingLineNumber=99&amp;StartingColumnNumber=0&amp;StartingLineNumber=90&amp;Timestamp=521416964.48094"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/lstomber/Documents/Development/GitHub/swift-PerformanceTestKit/PerformanceTestKit.playground#CharacterRangeLen=1118&amp;CharacterRangeLoc=913&amp;EndingColumnNumber=0&amp;EndingLineNumber=80&amp;StartingColumnNumber=42&amp;StartingLineNumber=55&amp;Timestamp=521416964.481024"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/lstomber/Documents/Development/GitHub/swift-PerformanceTestKit/PerformanceTestKit.playground#CharacterRangeLen=123&amp;CharacterRangeLoc=1908&amp;EndingColumnNumber=0&amp;EndingLineNumber=80&amp;StartingColumnNumber=0&amp;StartingLineNumber=73&amp;Timestamp=521416964.481105"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/lstomber/Documents/Development/GitHub/swift-PerformanceTestKit/PerformanceTestKit.playground#CharacterRangeLen=77&amp;CharacterRangeLoc=1954&amp;EndingColumnNumber=0&amp;EndingLineNumber=80&amp;StartingColumnNumber=0&amp;StartingLineNumber=75&amp;Timestamp=521416964.481184"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/lstomber/Documents/Development/GitHub/swift-PerformanceTestKit/PerformanceTestKit.playground#CharacterRangeLen=77&amp;CharacterRangeLoc=1954&amp;EndingColumnNumber=0&amp;EndingLineNumber=80&amp;StartingColumnNumber=0&amp;StartingLineNumber=75&amp;Timestamp=521416964.481265"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/lstomber/Documents/Development/GitHub/swift-PerformanceTestKit/PerformanceTestKit.playground#CharacterRangeLen=327&amp;CharacterRangeLoc=473&amp;EndingColumnNumber=0&amp;EndingLineNumber=49&amp;StartingColumnNumber=0&amp;StartingLineNumber=26&amp;Timestamp=521416964.481343"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/lstomber/Documents/Development/GitHub/swift-PerformanceTestKit/PerformanceTestKit.playground#CharacterRangeLen=327&amp;CharacterRangeLoc=473&amp;EndingColumnNumber=0&amp;EndingLineNumber=49&amp;StartingColumnNumber=0&amp;StartingLineNumber=26&amp;Timestamp=521416964.481422"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/lstomber/Documents/Development/GitHub/swift-PerformanceTestKit/PerformanceTestKit.playground#CharacterRangeLen=42&amp;CharacterRangeLoc=1866&amp;EndingColumnNumber=0&amp;EndingLineNumber=73&amp;StartingColumnNumber=1&amp;StartingLineNumber=72&amp;Timestamp=521416964.481501"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+   </TimelineItems>
+</Timeline>

@@ -1,0 +1,6 @@
+[submodule "Frameworks/Quick"]
+	path = Frameworks/Quick
+	url = git@github.com:Quick/Quick.git
+[submodule "Frameworks/Nimble"]
+	path = Frameworks/Nimble
+	url = git@github.com:Quick/Nimble.git
