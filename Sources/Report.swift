@@ -1,10 +1,24 @@
+//  MIT License
 //
-//  Report.swift
-//  PerformanceTestKit
+//  Copyright (c) 2017 Lucas Stomberg
 //
-//  Created by Lucas Stomberg on 7/8/17.
-//  Copyright © 2017 Lucas Stomberg. All rights reserved.
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files \(the "Software"\), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
 //
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//  SOFTWARE.
 
 import Foundation
 
@@ -36,7 +50,7 @@ public struct Report : CustomStringConvertible,CustomDebugStringConvertible {
       }
    }
 
-//   func taskResults(tasks: )
+   //   func taskResults(tasks: )
 
    func printi() -> String {
       var result = (10000.0,0.0,0.0)
@@ -52,7 +66,7 @@ public struct Report : CustomStringConvertible,CustomDebugStringConvertible {
 
       var description = "Report"
 
-      let shouldDisplayDetails = tasks.count > 1 || filters.isEmpty
+      let shouldDisplayDetails = filters.count > 1 || (filters.isEmpty && !filter.canDescend())
       if(shouldDisplayDetails) {
          let filterDescription = String(describing: filter)
          let taskCount = "Task Count: \(tasks.count)"
@@ -71,7 +85,7 @@ public struct Report : CustomStringConvertible,CustomDebugStringConvertible {
             if !reports.isEmpty {
                description += "\n  ├--" + reports.joined(separator: "\n  ├--")
             }
-            description += "\n  └--" + special.replacingOccurrences(of: "\n", with: "\n     ")
+            description += "\n  └--" + special.replacingOccurrences(of: "\n", with: "\n     ") + "\n  |  "
          }
       }
 
@@ -84,8 +98,8 @@ public struct Report : CustomStringConvertible,CustomDebugStringConvertible {
 extension Report.Filter {
    func childFilters(forTasks tasks: [Task]) -> [Report.Filter] {
       var filter = self
-      if module == nil {
-         let moduleNames = tasks.map { $0.module.name }
+      if filter.module == nil {
+         let moduleNames = Set(tasks.map { $0.module.name }).sorted()
          let reports = moduleNames.map { Report.Filter(module: Module(name: $0), partition: nil, name: nil) }
          if reports.count != 1 {
             return reports
@@ -94,8 +108,8 @@ extension Report.Filter {
          }
       }
 
-      if let module = module, module.segment == nil {
-         let subsegments = Set(tasks.flatMap { $0.module.segment })
+      if let module = filter.module, module.segment == nil {
+         let subsegments = Set(tasks.flatMap { $0.module.segment }).sorted()
 
          if !subsegments.isEmpty {
             let reports = subsegments.map { Report.Filter(module: Module(name: filter.module!.name, segment: $0), partition: nil, name: nil) }
@@ -107,8 +121,8 @@ extension Report.Filter {
          }
       }
 
-      if name == nil {
-         let names = tasks.map { $0.name }
+      if filter.name == nil {
+         let names = Set(tasks.map { $0.name }).sorted()
          let reports = names.map { Report.Filter(module: filter.module, partition: nil, name: $0) }
          if reports.count != 1 {
             return reports
@@ -117,9 +131,23 @@ extension Report.Filter {
          }
       }
 
-      if partition == nil {
-         let partitions = tasks.map { $0.partition } //want nil
-         return partitions.map { Report.Filter(module: filter.module, partition: $0, name: filter.name) }
+      if filter.partition == nil {
+         let partitions = tasks.reduce([String?](), { ary,task in
+            var ary = ary
+            if !ary.contains(where: { $0 == task.partition }) {
+               ary.append(task.partition)
+            }
+            return ary
+         })
+         return partitions.sorted(by: { (lhs, rhs) -> Bool in
+            guard let lhs = lhs else {
+               return true
+            }
+            if let rhs = rhs {
+               return lhs < rhs
+            }
+            return false
+         }).map { Report.Filter(module: filter.module, partition: $0, name: filter.name) }
       }
 
       return filter == self ? [] : [filter]
@@ -128,6 +156,13 @@ extension Report.Filter {
 
 
 extension Report.Filter : CustomDebugStringConvertible {
+   func canDescend() -> Bool{
+      guard let _ = self.partition else {
+         return true
+      }
+      return false
+   }
+
    init() {
       self.init(module: nil, partition: nil, name: nil)
    }
@@ -158,7 +193,10 @@ extension Report.Filter : CustomDebugStringConvertible {
                description.append("partition: \(actualPartition)")
             }
          }
-         return description.joined(separator: "  ")
+         if description.count == 1 {
+            description.append("(empty)")
+         }
+         return description.joined(separator: " ")
       }
    }
 
@@ -179,4 +217,5 @@ extension Report.Filter : Equatable {
       return equals
    }
 }
+
 

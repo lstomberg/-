@@ -1,10 +1,24 @@
+//  MIT License
 //
-//  TestSupport.swift
-//  PerformanceTestKitTests
+//  Copyright (c) 2017 Lucas Stomberg
 //
-//  Created by Lucas Stomberg on 7/11/17.
-//  Copyright © 2017 Lucas Stomberg. All rights reserved.
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files \(the "Software"\), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
 //
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//  SOFTWARE.
 
 import Foundation
 
@@ -48,23 +62,23 @@ struct Test {
       return string(unique: int, length: 2)
    }
 
-//   static func task(unique int: Int, withSegment: Bool) -> Task {
-//      let name = self.string(unique: int)
-//      let module = self.module(unique: int+1, withSegment: withSegment)
-//      let executionDetails = "details"
-//      let startTime = Date(timeIntervalSince1970: TimeInterval(int+2))
-//      let partition = self.partition(unique: int+3)
-//      let results = Task.Result(duration:Double(int))
-//      return Task(name: name, module: module, executionDetails: executionDetails, startTime: startTime, partition: partition, results: results)
-//   }
-//
-//   static func task(unique int: Int, withSegment: Bool, count: Int) -> [Task] {
-//      var tasks: [Task] = []
-//      for unique in int...(int+count) {
-//         tasks.append(task(unique:unique, withSegment: withSegment))
-//      }
-//      return tasks
-//   }
+   //   static func task(unique int: Int, withSegment: Bool) -> Task {
+   //      let name = self.string(unique: int)
+   //      let module = self.module(unique: int+1, withSegment: withSegment)
+   //      let executionDetails = "details"
+   //      let startTime = Date(timeIntervalSince1970: TimeInterval(int+2))
+   //      let partition = self.partition(unique: int+3)
+   //      let results = Task.Result(duration:Double(int))
+   //      return Task(name: name, module: module, executionDetails: executionDetails, startTime: startTime, partition: partition, results: results)
+   //   }
+   //
+   //   static func task(unique int: Int, withSegment: Bool, count: Int) -> [Task] {
+   //      var tasks: [Task] = []
+   //      for unique in int...(int+count) {
+   //         tasks.append(task(unique:unique, withSegment: withSegment))
+   //      }
+   //      return tasks
+   //   }
 }
 
 
@@ -118,6 +132,7 @@ extension Task {
 //      return TestVariables.task(unique: index.task, withSegment: withSegment)
 //   }
 //}
+
 
 
 

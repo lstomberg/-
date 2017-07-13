@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		49353F721F138DA400C94F85 /* Common.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 49353F6D1F138DA400C94F85 /* Common.xcconfig */; };
-		49353F731F138DA400C94F85 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 49353F6E1F138DA400C94F85 /* Debug.xcconfig */; };
-		49353F741F138DA400C94F85 /* Profile.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 49353F6F1F138DA400C94F85 /* Profile.xcconfig */; };
-		49353F751F138DA400C94F85 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 49353F701F138DA400C94F85 /* Release.xcconfig */; };
-		49353F761F138DA400C94F85 /* Test.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 49353F711F138DA400C94F85 /* Test.xcconfig */; };
 		4990612C1F14497F0002C6AF /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4990612B1F14497F0002C6AF /* TaskTests.swift */; };
 		4990612E1F14499C0002C6AF /* ReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4990612D1F14499C0002C6AF /* ReportTests.swift */; };
 		499061301F1449AA0002C6AF /* PerformanceLogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4990612F1F1449AA0002C6AF /* PerformanceLogTests.swift */; };
@@ -61,6 +56,7 @@
 		49C96D541F15B5C00050BC4D /* TestSupport-RandomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestSupport-RandomTests.swift"; sourceTree = "<group>"; };
 		49E55CF81F1186AC006EAD66 /* PerformanceTestKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerformanceTestKit.h; sourceTree = "<group>"; };
 		49E55CFA1F1186D5006EAD66 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49E5A4151F177DB300534235 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +96,7 @@
 				49A816F51F117F57000104B4 /* Products */,
 				49E55CF51F11861C006EAD66 /* Docs */,
 				498033261F147A00004C285D /* Frameworks */,
+				49E5A4141F177D6B00534235 /* Tools */,
 			);
 			sourceTree = "<group>";
 		};
@@ -166,6 +163,14 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		49E5A4141F177D6B00534235 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				49E5A4151F177DB300534235 /* .swiftlint.yml */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -187,6 +192,7 @@
 				49A816F01F117F57000104B4 /* Frameworks */,
 				49A816F11F117F57000104B4 /* Headers */,
 				49A816F21F117F57000104B4 /* Resources */,
+				49E5A4171F177E5F00534235 /* Swift Lint */,
 			);
 			buildRules = (
 			);
@@ -259,11 +265,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49353F751F138DA400C94F85 /* Release.xcconfig in Resources */,
-				49353F741F138DA400C94F85 /* Profile.xcconfig in Resources */,
-				49353F731F138DA400C94F85 /* Debug.xcconfig in Resources */,
-				49353F721F138DA400C94F85 /* Common.xcconfig in Resources */,
-				49353F761F138DA400C94F85 /* Test.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +276,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		49E5A4171F177E5F00534235 /* Swift Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Swift Lint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		49A816EF1F117F57000104B4 /* Sources */ = {
@@ -616,6 +634,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lucasstomberg.PerformanceTestKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

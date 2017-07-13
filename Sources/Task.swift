@@ -1,10 +1,24 @@
+//  MIT License
 //
-//  Task.swift
-//  PerformanceTestKit
+//  Copyright (c) 2017 Lucas Stomberg
 //
-//  Created by Lucas Stomberg on 7/8/17.
-//  Copyright © 2017 Lucas Stomberg. All rights reserved.
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files \(the "Software"\), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
 //
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//  SOFTWARE.
 
 import Foundation
 
@@ -36,21 +50,21 @@ public struct Module : Codable,Hashable {
 }
 
 struct Task : Codable,Hashable {
-  struct Result : Codable,Equatable {
-    let duration: TimeInterval
+   struct Result : Codable,Equatable {
+      let duration: TimeInterval
 
-   public static func ==(lhs:Task.Result,rhs:Task.Result) -> Bool {
-      return lhs.duration == rhs.duration
+      public static func ==(lhs:Task.Result,rhs:Task.Result) -> Bool {
+         return lhs.duration == rhs.duration
+      }
    }
-  }
 
-  let name:String
-  let module:Module
-  let executionDetails: String?
-  let startTime:Date
+   let name:String
+   let module:Module
+   let executionDetails: String?
+   let startTime:Date
 
-  let partition:String?
-  let results: Result?
+   let partition:String?
+   let results: Result?
 
    public static func ==(lhs:Task,rhs:Task) -> Bool {
       return lhs.name == rhs.name
@@ -81,19 +95,19 @@ extension Task {
       self.init(name: named, module: module, executionDetails: executionDetails, startTime: Date(), partition: partition, results: result)
    }
 
-  func complete(partition: String?) -> Task {
-    let result = Result(duration: Date().timeIntervalSince(startTime))
-    return Task(named: name, in: module, executionDetails: executionDetails, partition: partition, result: result)
-  }
+   func complete(partition: String?) -> Task {
+      let result = Result(duration: Date().timeIntervalSince(startTime))
+      return Task(named: name, in: module, executionDetails: executionDetails, partition: partition, result: result)
+   }
 }
 
 extension Array where Element == Task {
 
-  mutating func remove(taskIn module: Module, named name:String) -> [Task] {
-    let removed = self.filter { $0.module == module && $0.name == name }
-    self = self.filter { !($0.module == module && $0.name == name) }
-    return removed
-  }
+   mutating func remove(taskIn module: Module, named name:String) -> [Task] {
+      let removed = self.filter { $0.module == module && $0.name == name }
+      self = self.filter { !($0.module == module && $0.name == name) }
+      return removed
+   }
 }
 
 
@@ -350,5 +364,3 @@ extension Array where Element == Task {
 //protocol TypedEquatableStruct {
 //   associatedtype Item: Equatable
 //}
-
-

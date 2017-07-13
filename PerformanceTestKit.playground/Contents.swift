@@ -1,4 +1,24 @@
-//: Playground - noun: a place where people can play
+//  MIT License
+//
+//  Copyright (c) 2017 Lucas Stomberg
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files \(the "Software"\), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//  SOFTWARE.
 
 import UIKit
 import PlaygroundSupport
@@ -6,54 +26,6 @@ import PerformanceTestKit
 
 let name="Store"
 let module = Module(name:"Lucas",segment:"none")
-
-
-//let y: Optional<String?> = Optional(nil)
-//
-//var array: [String?] = ["asdf",nil]
-//let val = array.first { $0 == "ewt" }
-//val
-//let n: String? = nil
-//let o: String?? = nil
-//
-//let a = (nil == n)
-//let b = (n == nil)
-//
-//let p: String?? = nil
-//a
-//
-//
-//func oo(vard: String??){
-//   print(vard)
-////   print(type(of: vard))
-//}
-//
-//
-//let d: Array<String> = [String]()
-//
-//oo(vard:nil)
-//oo(vard:n)
-//oo(vard: o)
-//
-//let onil:String?? = Optional(nil)
-//print(onil)
-//
-//let onil2:String?? = nil
-//print(onil2)
-//
-//let nn:String?? = o
-//if nn == nil {
-//   print("HI")
-//} else {
-//   print("WOO")
-//}
-
-//array.append(n)
-//array.append(o)
-
-
-//Task(named: name, in: module)
-//PerformanceLog.default.data.runningTasks
 
 try? PerformanceLog.default.startTask(named: name, inModule: module)
 try? PerformanceLog.default.endTask(inModule: module, named: name, storingParition: "3")
@@ -97,4 +69,3 @@ print(desc)
 //}
 //
 //PlaygroundPage.current.needsIndefiniteExecution = true
-

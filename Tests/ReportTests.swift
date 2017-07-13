@@ -219,12 +219,22 @@ extension ReportTests {
 
    func internal___OUTPUT___realisticTasks() -> [Task] {
       var tasks: [Task] = []
-      for e in 0...100 {
-         let (n,m,s,st,p,r) = (e%30,e%8,e%16,e%8,e%10,e%42)
+      //      for e in 0...100 {
+      //         let (n,m,s,st,p,r) = (e%30,e%8,e%16,e%8,e%10,e%42)
+      //         let name = Test.string(unique: n,length: 9)
+      //         let module = Test.module(unique: m, withSegment: (s%8 != 0))
+      //         let startTime = Date(timeIntervalSinceNow: Double(st))
+      //         let partition = Test.partition(unique: p)
+      //         let results = Task.Result(duration:0.01+Double(r^r/(84000)))
+      //         let task = Task(name: name, module: module, executionDetails: nil, startTime: startTime, partition: partition, results: results)
+      //         tasks.append(task)
+      //      }
+      for e in 0..<100 {
+         let (n,m,s,p,st,r) = (e%3,10+e%3,2+e%3,e%2,e%10,e%42)
          let name = Test.string(unique: n,length: 9)
-         let module = Test.module(unique: m, withSegment: (s%8 != 0))
+         let module = Test.module(unique: m, withSegment: s != 0)
+         let partition:String? = Test.partition(unique: p)
          let startTime = Date(timeIntervalSinceNow: Double(st))
-         let partition = Test.partition(unique: p)
          let results = Task.Result(duration:0.01+Double(r^r/(84000)))
          let task = Task(name: name, module: module, executionDetails: nil, startTime: startTime, partition: partition, results: results)
          tasks.append(task)
@@ -234,10 +244,14 @@ extension ReportTests {
    }
 
    func test___OUTPUT___() {
+      for t in internal___OUTPUT___realisticTasks() {
+         print(t)
+      }
       let report = Report(tasks: internal___OUTPUT___realisticTasks())
       print (report.description)
    }
 }
+
 
 
 
