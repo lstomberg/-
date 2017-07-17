@@ -3,7 +3,7 @@
 //  Copyright (c) 2017 Lucas Stomberg
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files \(the "Software"\), to deal
+//  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
@@ -19,9 +19,9 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
+//
 
 import Foundation
-
 
 /*
  *
@@ -116,7 +116,8 @@ extension Task {
       let uresults: Result? = results ?? (Bool.random() ? nil : Task.Result(duration: Double.random()))
       let upartition: String? = partition ?? (Bool.random() ? nil : String.random(length: 6))
 
-      return Task(name: uname, module: umodule, executionDetails: uexecutionDetails, startTime: ustartTime, partition: upartition, results: uresults)
+      return Task(name: uname, module: umodule, executionDetails: uexecutionDetails,startTime: ustartTime,
+                  partition: upartition, results: uresults)
    }
 
    static func random(count: Int,
@@ -128,9 +129,9 @@ extension Task {
                       partition:String?? = nil) -> [Task] {
       var tasks = [Task]()
       for _ in 0..<count {
-         tasks.append(Task.random(name: name,module: module,executionDetails: executionDetails,startTime: startTime,results: results,partition: partition))
+         tasks.append(Task.random(name: name,module: module, executionDetails: executionDetails, startTime: startTime, results: results,
+                                  partition: partition))
       }
       return tasks
    }
 }
-

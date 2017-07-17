@@ -3,7 +3,7 @@
 //  Copyright (c) 2017 Lucas Stomberg
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files \(the "Software"\), to deal
+//  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
@@ -19,11 +19,14 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
+//
 
 import UIKit
 import PlaygroundSupport
 import PerformanceTestKit
 
+#if swift(>=3.2)
+//swift 4 allows tests to access internal data and functions.  Swift 3.2 does not
 let name="Store"
 let module = Module(name:"Lucas",segment:"none")
 
@@ -51,21 +54,4 @@ report.inModule
 let desc = report.debugDescription
 print(desc)
 
-//PerformanceLog.default.data.runningTasks
-//PerformanceLog.default.data.completedTasks
-
-//let dispatchQueue = DispatchQueue(label: "testQueue")
-//
-//dispatchQueue.asyncAfter(deadline: .now() + 2) {
-//   PerformanceLog.default.data.runningTasks
-//   try? PerformanceLog.default.endTask(inModule: Module(name:"Lucas",segment:"none"), named: "Store")
-//   PerformanceLog.default.data.runningTasks
-//   PerformanceLog.default.data.completedTasks
-//
-//   let rpt = PerformanceLog.default.report()
-//   rpt.tasks
-//   print(rpt.description)
-//   PlaygroundPage.current.finishExecution()
-//}
-//
-//PlaygroundPage.current.needsIndefiniteExecution = true
+#endif

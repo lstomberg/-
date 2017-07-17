@@ -3,7 +3,7 @@
 //  Copyright (c) 2017 Lucas Stomberg
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files \(the "Software"\), to deal
+//  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
@@ -19,9 +19,9 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
+//
 
 import Foundation
-
 
 public struct Report : CustomStringConvertible,CustomDebugStringConvertible {
    struct Filter {
@@ -39,15 +39,11 @@ public struct Report : CustomStringConvertible,CustomDebugStringConvertible {
    }
 
    public var description: String {
-      get {
-         return printi() //figure out how to strip debug info later
-      }
+      return printi() //figure out how to strip debug info later
    }
 
    public var debugDescription: String {
-      get {
-         return printi()
-      }
+      return printi()
    }
 
    //   func taskResults(tasks: )
@@ -67,11 +63,11 @@ public struct Report : CustomStringConvertible,CustomDebugStringConvertible {
       var description = "Report"
 
       let shouldDisplayDetails = filters.count > 1 || (filters.isEmpty && !filter.canDescend())
-      if(shouldDisplayDetails) {
+      if shouldDisplayDetails {
          let filterDescription = String(describing: filter)
          let taskCount = "Task Count: \(tasks.count)"
          let maximumDuration = "Maximum: \(result.2)s"
-         let averageDuration = "Average: \(result.1/Double(tasks.count))s"
+         let averageDuration = "Average: \(result.1 / Double(tasks.count))s"
          let minimumDuration = "Minimum: \(result.0)s"
          description += "\n " + [filterDescription, taskCount, maximumDuration, averageDuration, minimumDuration].joined(separator: "\n ")
       }
@@ -79,8 +75,8 @@ public struct Report : CustomStringConvertible,CustomDebugStringConvertible {
       if !filters.isEmpty {
          var reports: [String] = filters.map { Report(tasks: tasks, filter: $0).description }
          if let special = reports.last {
-            reports.remove(at: reports.endIndex-1)
-            reports = reports.map { $0.replacingOccurrences(of: "\n", with: "\n  |  ")}
+            reports.remove(at: reports.endIndex - 1)
+            reports = reports.map { $0.replacingOccurrences(of: "\n", with: "\n  |  ") }
 
             if !reports.isEmpty {
                description += "\n  ├--" + reports.joined(separator: "\n  ├--")
@@ -93,7 +89,6 @@ public struct Report : CustomStringConvertible,CustomDebugStringConvertible {
    }
 
 }
-
 
 extension Report.Filter {
    func childFilters(forTasks tasks: [Task]) -> [Report.Filter] {
@@ -112,7 +107,11 @@ extension Report.Filter {
          let subsegments = Set(tasks.flatMap { $0.module.segment }).sorted()
 
          if !subsegments.isEmpty {
-            let reports = subsegments.map { Report.Filter(module: Module(name: filter.module!.name, segment: $0), partition: nil, name: nil) }
+            let reports: [Report.Filter] = subsegments.map {
+               let module = Module(name: filter.module!.name, segment: $0)
+               return Report.Filter(module: module, partition: nil, name: nil)
+            }
+
             if reports.count != 1 {
                return reports
             } else {
@@ -154,10 +153,9 @@ extension Report.Filter {
    }
 }
 
-
 extension Report.Filter : CustomDebugStringConvertible {
-   func canDescend() -> Bool{
-      guard let _ = self.partition else {
+   func canDescend() -> Bool {
+      guard self.partition != nil else {
          return true
       }
       return false
@@ -167,7 +165,7 @@ extension Report.Filter : CustomDebugStringConvertible {
       self.init(module: nil, partition: nil, name: nil)
    }
 
-   func tasks<T:Sequence>(_ fromTasks: T) -> [Task] where T.Element == Task {
+   func tasks<T:Sequence>(_ fromTasks: T) -> [Task] where T.Iterator.Element == Task {
       var tasks = fromTasks.filter { $0.module ∈ module }
       tasks = tasks.filter { name == nil || $0.name == name! }
 
@@ -179,37 +177,37 @@ extension Report.Filter : CustomDebugStringConvertible {
    }
 
    public var description: String {
-      get {
-         var description: [String] = ["Filter:"]
-         if let module = module {
-            let string = "(Module: \(module.name), segment: \(String(describing: module.segment)))" //ideally we could strip segment somewhat
-            description.append(string)
-         }
-         if let name = name {
-            description.append("name: \(name)")
-         }
-         if let partition = partition {
-            if let actualPartition = partition {
-               description.append("partition: \(actualPartition)")
-            }
-         }
-         if description.count == 1 {
-            description.append("(empty)")
-         }
-         return description.joined(separator: " ")
+      var description: [String] = ["Filter:"]
+
+      if let module = module {
+         let string = "(Module: \(module.name), segment: \(String(describing: module.segment)))" //ideally we could strip segment somewhat
+         description.append(string)
       }
+
+      if let name = name {
+         description.append("name: \(name)")
+      }
+
+      if let partition = partition {
+         if let actualPartition = partition {
+            description.append("partition: \(actualPartition)")
+         }
+      }
+
+      if description.count == 1 {
+         description.append("(empty)")
+      }
+
+      return description.joined(separator: " ")
    }
 
    public var debugDescription: String {
-      get {
          return description
-      }
    }
 }
 
-
 extension Report.Filter : Equatable {
-   static func ==(lhs:Report.Filter,rhs:Report.Filter) -> Bool {
+   static func == (lhs:Report.Filter,rhs:Report.Filter) -> Bool {
       var equals = lhs.module == rhs.module && lhs.name == rhs.name
       if let arg0 = lhs.partition, let arg1 = rhs.partition {
          equals = equals || arg0 == arg1
@@ -217,5 +215,3 @@ extension Report.Filter : Equatable {
       return equals
    }
 }
-
-
