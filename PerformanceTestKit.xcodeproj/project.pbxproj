@@ -10,6 +10,7 @@
 		49A2102D1F1188150046778F /* PerformanceLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A2102C1F1188150046778F /* PerformanceLog.swift */; };
 		49A210311F1188AE0046778F /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A210301F1188AE0046778F /* Task.swift */; };
 		49A210341F1189600046778F /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A210331F1189600046778F /* Report.swift */; };
+		49A363F0230DCBA6004F1444 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A363EF230DCBA6004F1444 /* Codable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		49A2102F1F1188550046778F /* Macros-ObjectiveC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Macros-ObjectiveC.h"; sourceTree = "<group>"; };
 		49A210301F1188AE0046778F /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		49A210331F1189600046778F /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		49A363EF230DCBA6004F1444 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		49A816F41F117F57000104B4 /* PerformanceTestKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PerformanceTestKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C96D4D1F1562600050BC4D /* TestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSupport.swift; sourceTree = "<group>"; };
 		49C96D501F1574340050BC4D /* TestSupportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSupportTests.swift; sourceTree = "<group>"; };
@@ -43,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49A363EE230DCB95004F1444 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				49A363EF230DCBA6004F1444 /* Codable.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		49A816EA1F117F57000104B4 = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +74,7 @@
 		49E55CF11F1185ED006EAD66 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				49A363EE230DCB95004F1444 /* Extensions */,
 				49A210301F1188AE0046778F /* Task.swift */,
 				49A210331F1189600046778F /* Report.swift */,
 				49A2102C1F1188150046778F /* PerformanceLog.swift */,
@@ -207,6 +218,7 @@
 			files = (
 				49A210311F1188AE0046778F /* Task.swift in Sources */,
 				49A2102D1F1188150046778F /* PerformanceLog.swift in Sources */,
+				49A363F0230DCBA6004F1444 /* Codable.swift in Sources */,
 				49A210341F1189600046778F /* Report.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

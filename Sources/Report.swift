@@ -23,49 +23,58 @@
 
 import Foundation
 
-public struct Report {
-    struct Filter: Equatable {
-      let module: Module?
-      let partition: String??
-      let name: String?
-   }
+public struct Grouper : Equatable {
+    let name: String
+    let module: Module
+    let partition: String?
+}
 
-   let tasks: [Task]
-   let filter: Filter
+public struct Filterer {
+    public let grouper: Grouper
 
-   init(tasks: [Task], filter: Filter = Filter()) {
-      self.filter = filter
-      self.tasks = filter.tasks(tasks)
-   }
+    public func filter(results: [Result]) -> [Result] {
 
+    }
+}
+
+public struct Report : CustomStringConvertible {
+    public let results: [Result]
+
+    public var description: String {
+
+        _ = Dictionary(grouping: self.results, by: { $0.module.name! })
+
+
+        return print(report: self)
+    }
 }
 
 private func print(report: Report) -> String {
    var result = (10000.0,0.0,0.0)
-    result = report.tasks.reduce(result) { (arg0,task) in
+    result = report.results.reduce(result) { (arg0,result) in
       var (min, total, max) = arg0
-      let duration = task.results!.duration
+      let duration = result.duration
       min = Double.minimum(min, duration)
       total += duration
       max = Double.maximum(max, duration)
       return (min,total,max)
    }
-   let filters = report.filter.childFilters(forTasks: report.tasks)
+   let filters = report.filter.childFilters(forTasks: report.results)
 
    var description = "Report"
 
    let shouldDisplayDetails = filters.count > 1 || (filters.isEmpty && !report.filter.canDescend())
    if shouldDisplayDetails {
       let filterDescription = String(describing: report.filter)
-      let taskCount = "Task Count: \(report.tasks.count)"
+      let taskCount = "Task Count: \(report.results.count)"
       let maximumDuration = "Maximum: \(result.2)s"
-      let averageDuration = "Average: \(result.1 / Double(report.tasks.count))s"
+      let averageDuration = "Average: \(result.1 / Double(report.results.count))s"
       let minimumDuration = "Minimum: \(result.0)s"
       description += "\n " + [filterDescription, taskCount, maximumDuration, averageDuration, minimumDuration].joined(separator: "\n ")
    }
 
    if !filters.isEmpty {
-      var reports: [String] = filters.map { Report(tasks: report.tasks, filter: $0).description }
+      var reports: [String] = filters.map { Report(results: report.results, filter: $0).description }
       if let special = reports.last {
          reports.remove(at: reports.endIndex - 1)
          reports = reports.map { $0.replacingOccurrences(of: "\n", with: "\n  |  ") }
@@ -80,23 +89,13 @@ private func print(report: Report) -> String {
    return description
 }
 
-extension Report : CustomStringConvertible, CustomDebugStringConvertible {
 
-    public var description: String {
-       return print(report: self) //figure out how to strip debug info later
-    }
+extension Grouper {
 
-    public var debugDescription: String {
-        return print(report: self)
-    }
-}
-
-
-extension Report.Filter {
-   func childFilters(forTasks tasks: [Task]) -> [Report.Filter] {
+   func subgroups(with results: [Result]) -> [Grouper] {
       var filter = self
       if filter.module == nil {
-         let moduleNames = Set(tasks.map { $0.module.name }).sorted()
+         let moduleNames = Set(results.map { $0.module.name }).sorted()
          let reports = moduleNames.map { Report.Filter(module: Module(name: $0), partition: nil, name: nil) }
          if reports.count != 1 {
             return reports

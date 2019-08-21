@@ -24,72 +24,90 @@
 import Foundation
 import UIKit
 
-extension PerformanceLog.Data : Codable { }
+//
+// MARK: Class definition
+//
 
-public class PerformanceLog {
+public class PerformanceLogger {
 
-   // ** Storage **
-   struct Data {
-      let name: String = "PerformanceLog"
-      var completedTasks: [Task] = []
-      var runningTasks: [Task] = []
-   }
+    public static let `default` = PerformanceLogger()
 
-   enum RunningTaskError: Error {
-      case invalidNumberOfTasksRemoved([Task],Module)
-   }
+    private var runningTasks: [String:Task] = [:]
+    private let fileURL: URL
 
-   public static let `default` = PerformanceLog()
+    private var results: [Result] = [] {
+        didSet {
+            save(results: results, to: fileURL)
+        }
+    }
 
-   var data = Data()
+    init(to fileURL: URL) {
+        self.fileURL = fileURL
+        self.results = loadResults(from: fileURL)
+    }
 
-   init() {
-      NotificationCenter.default.addObserver(self, selector: #selector(save), name: UIApplication.willResignActiveNotification, object: nil)
-   }
-
-   deinit {
-      NotificationCenter.default.removeObserver(self)
-   }
-
-   @objc
-   func save() {
-
-#if swift(>=3.2)
-      guard let encodedData = try? JSONEncoder().encode(data) else {
-         return
-      }
-      try? encodedData.write(to: data.filePath)
-#else
-      print("Saving is not supported in Swift 3")
-#endif
-   }
-
-   // MARK: PUBLIC API
-   public func startTask(named name:String, inModule module:Module, storingDetails details:String? = nil) throws {
-      if case let removedTasks = data.runningTasks.remove(taskIn: module, named: name), removedTasks.count > 1 {
-         throw RunningTaskError.invalidNumberOfTasksRemoved(removedTasks,module)
-      }
-      data.runningTasks.append(Task(named: name, in: module, executionDetails: details))
-   }
-
-   func endTask(inModule module: Module, named name: String, storingParition partition:String? = nil) throws {
-      let removedTasks = data.runningTasks.remove(taskIn: module, named: name)
-      guard let task = removedTasks.first, removedTasks.count == 1 else {
-         throw RunningTaskError.invalidNumberOfTasksRemoved(removedTasks, module)
-      }
-      data.completedTasks.append(task.complete(partition: partition))
-   }
-
-   func report() -> Report {
-      return Report(tasks: data.completedTasks)
-   }
+    convenience init(named name: String? = nil) {
+        let containerDir: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let name = name ?? "DefaultLogger"
+        let filePath: String = "\(containerDir)/\(name).plist"
+        let url: URL = URL(fileURLWithPath: filePath)
+        self.init(to: url)
+    }
 }
 
-extension PerformanceLog.Data {
+//
+// MARK: Save/Load
+//
 
-   var filePath: URL {
-      let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-      return URL(fileURLWithPath:documentsPath + "/" + name + ".plist")
-   }
+private func save(results: [Result], to url: URL) {
+    try? results.encodeJSON().write(to: url)
+}
+
+private func loadResults(from url: URL) -> [Result]  {
+    guard let encodedData: Data = try? Data(contentsOf: url),
+        let results: [Result] = try? [Result].decode(fromJSON: encodedData) else {
+            return []
+    }
+    return results
+}
+
+//
+// MARK: Tasks
+//
+
+public struct TaskIdentifier {
+    fileprivate let key: String
+}
+
+public extension PerformanceLogger {
+
+    // MARK: PUBLIC API
+    func start(_ configuration: TaskConfiguration) -> TaskIdentifier {
+        let task = Task(configuration: configuration)
+        let key =  UUID().uuidString
+        self.runningTasks[key] = task
+        return TaskIdentifier(key: key)
+    }
+
+    func end(task taskIdentifier: TaskIdentifier, partition: String? = nil) {
+        guard let task: Task = self.runningTasks.removeValue(forKey: taskIdentifier.key) else {
+            print("\(taskIdentifier) already finished")
+            return
+        }
+        let result: Result = task.finish(partition)
+        self.results.append(result)
+    }
+
+}
+
+//
+// MARK: Reporting
+//
+
+public extension PerformanceLogger {
+
+    func generateReport() -> Report {
+        return Report(results: self.results)
+    }
 
 }

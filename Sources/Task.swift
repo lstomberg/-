@@ -25,89 +25,47 @@ import Foundation
 
 infix operator ∈: AdditionPrecedence
 
-#if swift(>=3.2)
-   extension Module : Codable { }
-   extension Task : Codable { }
-   extension Task.Result : Codable { }
-#endif
-
-public struct Module : Hashable {
-
-   let name: String
-   let segment: String?
-
-   public static func == (lhs:Module, rhs:Module) -> Bool {
-      return lhs.name == rhs.name && lhs.segment == rhs.segment
-   }
-
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(name)
-        hasher.combine(segment)
-    }
-
-   // swiftlint:disable identifier_name
-   static func ∈(lhs:Module, rhs:Module?) -> Bool {
-   // swiftlint:enable identifier_name
-      guard let rhs = rhs else {
-         return true
-      }
-      return (lhs.name == rhs.name && (rhs.segment == nil || lhs.segment == rhs.segment))
-   }
-
-   public init(name: String, segment: String? = nil) {
-      self.name = name
-      self.segment = segment
-   }
+public struct Module : Codable, Equatable {
+    public let name: String
+    public let segment: String?
 }
 
-struct Task : Hashable {
-   struct Result : Equatable {
-      let duration: TimeInterval
-   }
+public struct TaskConfiguration : Codable {
+    public let name: String
+    public let module: Module
+    public let executionDetails: String?
+}
 
-   let name: String
-   let module: Module
-   let executionDetails: String?
-   let startTime: Date
+public struct Task {
+    public let configuration: TaskConfiguration
+    public let startTime: Date = Date()
+}
 
-   let partition: String?
-   let results: Result?
-
-   public static func == (lhs:Task, rhs:Task) -> Bool {
-      return lhs.name == rhs.name
-         && lhs.module == rhs.module
-         && lhs.executionDetails == rhs.executionDetails
-         && lhs.partition == rhs.partition
-         && lhs.results == rhs.results
-   }
-
-   public func hash(into hasher: inout Hasher) {
-        hasher.combine(name)
-        hasher.combine(module)
-        hasher.combine(startTime)
-        hasher.combine(executionDetails)
-        hasher.combine(partition)
-        hasher.combine(results?.duration)
-   }
+public struct Result : Codable {
+    public let configuration: TaskConfiguration
+    public let duration: TimeInterval
+    public let partition: String?
 }
 
 extension Task {
 
-   init(named:String, in module:Module, executionDetails: String? = nil, partition: String? = nil, result: Result? = nil) {
-      self.init(name: named, module: module, executionDetails: executionDetails, startTime: Date(), partition: partition, results: result)
-   }
+    public func finish(_ partition: String? = nil) -> Result {
+        let duration = Date().timeIntervalSince(self.startTime)
+        let result = Result(configuration: self.configuration, duration: duration, partition: partition)
+        return result
+    }
 
-   func complete(partition: String?) -> Task {
-      let result = Result(duration: Date().timeIntervalSince(startTime))
-      return Task(named: name, in: module, executionDetails: executionDetails, partition: partition, result: result)
-   }
 }
 
-extension Array where Element == Task {
+extension Module {
 
-   mutating func remove(taskIn module: Module, named name:String) -> [Task] {
-      let removed = self.filter { $0.module == module && $0.name == name }
-      self = self.filter { !($0.module == module && $0.name == name) }
-      return removed
-   }
+    // swiftlint:disable identifier_name
+    static func ∈(lhs:Module, rhs:Module?) -> Bool {
+    // swiftlint:enable identifier_name
+         guard let rhs = rhs else {
+             return true
+         }
+         return (lhs.name == rhs.name && (rhs.segment == nil || lhs.segment == rhs.segment))
+    }
+
 }
