@@ -40,9 +40,11 @@ public struct Module : Hashable {
       return lhs.name == rhs.name && lhs.segment == rhs.segment
    }
 
-   public var hashValue: Int {
-      return name.hashValue ^ (segment?.hashValue ?? 0)
-   }
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+        hasher.combine(segment)
+    }
+
    // swiftlint:disable identifier_name
    static func ∈(lhs:Module, rhs:Module?) -> Bool {
    // swiftlint:enable identifier_name
@@ -61,18 +63,14 @@ public struct Module : Hashable {
 struct Task : Hashable {
    struct Result : Equatable {
       let duration: TimeInterval
-
-      public static func == (lhs:Task.Result, rhs:Task.Result) -> Bool {
-         return lhs.duration == rhs.duration
-      }
    }
 
-   let name:String
-   let module:Module
+   let name: String
+   let module: Module
    let executionDetails: String?
-   let startTime:Date
+   let startTime: Date
 
-   let partition:String?
+   let partition: String?
    let results: Result?
 
    public static func == (lhs:Task, rhs:Task) -> Bool {
@@ -83,18 +81,13 @@ struct Task : Hashable {
          && lhs.results == rhs.results
    }
 
-   public var hashValue: Int {
-      var hashValue = name.hashValue ^ module.hashValue ^ startTime.hashValue
-      if let executionDetails = executionDetails {
-         hashValue ^= executionDetails.hashValue
-      }
-      if let partition = partition {
-         hashValue ^= partition.hashValue
-      }
-      if let results = results {
-         hashValue ^= results.duration.hashValue
-      }
-      return hashValue
+   public func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+        hasher.combine(module)
+        hasher.combine(startTime)
+        hasher.combine(executionDetails)
+        hasher.combine(partition)
+        hasher.combine(results?.duration)
    }
 }
 

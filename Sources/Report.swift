@@ -23,8 +23,8 @@
 
 import Foundation
 
-public struct Report : CustomStringConvertible,CustomDebugStringConvertible {
-   struct Filter {
+public struct Report {
+    struct Filter: Equatable {
       let module: Module?
       let partition: String??
       let name: String?
@@ -38,57 +38,59 @@ public struct Report : CustomStringConvertible,CustomDebugStringConvertible {
       self.tasks = filter.tasks(tasks)
    }
 
-   public var description: String {
-      return printi() //figure out how to strip debug info later
-   }
-
-   public var debugDescription: String {
-      return printi()
-   }
-
-   //   func taskResults(tasks: )
-
-   func printi() -> String {
-      var result = (10000.0,0.0,0.0)
-      result = tasks.reduce(result) { (arg0,task) in
-         var (min, total, max) = arg0
-         let duration = task.results!.duration
-         min = Double.minimum(min, duration)
-         total += duration
-         max = Double.maximum(max, duration)
-         return (min,total,max)
-      }
-      let filters = filter.childFilters(forTasks: tasks)
-
-      var description = "Report"
-
-      let shouldDisplayDetails = filters.count > 1 || (filters.isEmpty && !filter.canDescend())
-      if shouldDisplayDetails {
-         let filterDescription = String(describing: filter)
-         let taskCount = "Task Count: \(tasks.count)"
-         let maximumDuration = "Maximum: \(result.2)s"
-         let averageDuration = "Average: \(result.1 / Double(tasks.count))s"
-         let minimumDuration = "Minimum: \(result.0)s"
-         description += "\n " + [filterDescription, taskCount, maximumDuration, averageDuration, minimumDuration].joined(separator: "\n ")
-      }
-
-      if !filters.isEmpty {
-         var reports: [String] = filters.map { Report(tasks: tasks, filter: $0).description }
-         if let special = reports.last {
-            reports.remove(at: reports.endIndex - 1)
-            reports = reports.map { $0.replacingOccurrences(of: "\n", with: "\n  |  ") }
-
-            if !reports.isEmpty {
-               description += "\n  ├--" + reports.joined(separator: "\n  ├--")
-            }
-            description += "\n  └--" + special.replacingOccurrences(of: "\n", with: "\n     ") + "\n  |  "
-         }
-      }
-
-      return description
-   }
-
 }
+
+private func print(report: Report) -> String {
+   var result = (10000.0,0.0,0.0)
+    result = report.tasks.reduce(result) { (arg0,task) in
+      var (min, total, max) = arg0
+      let duration = task.results!.duration
+      min = Double.minimum(min, duration)
+      total += duration
+      max = Double.maximum(max, duration)
+      return (min,total,max)
+   }
+   let filters = report.filter.childFilters(forTasks: report.tasks)
+
+   var description = "Report"
+
+   let shouldDisplayDetails = filters.count > 1 || (filters.isEmpty && !report.filter.canDescend())
+   if shouldDisplayDetails {
+      let filterDescription = String(describing: report.filter)
+      let taskCount = "Task Count: \(report.tasks.count)"
+      let maximumDuration = "Maximum: \(result.2)s"
+      let averageDuration = "Average: \(result.1 / Double(report.tasks.count))s"
+      let minimumDuration = "Minimum: \(result.0)s"
+      description += "\n " + [filterDescription, taskCount, maximumDuration, averageDuration, minimumDuration].joined(separator: "\n ")
+   }
+
+   if !filters.isEmpty {
+      var reports: [String] = filters.map { Report(tasks: report.tasks, filter: $0).description }
+      if let special = reports.last {
+         reports.remove(at: reports.endIndex - 1)
+         reports = reports.map { $0.replacingOccurrences(of: "\n", with: "\n  |  ") }
+
+         if !reports.isEmpty {
+            description += "\n  ├--" + reports.joined(separator: "\n  ├--")
+         }
+         description += "\n  └--" + special.replacingOccurrences(of: "\n", with: "\n     ") + "\n  |  "
+      }
+   }
+
+   return description
+}
+
+extension Report : CustomStringConvertible, CustomDebugStringConvertible {
+
+    public var description: String {
+       return print(report: self) //figure out how to strip debug info later
+    }
+
+    public var debugDescription: String {
+        return print(report: self)
+    }
+}
+
 
 extension Report.Filter {
    func childFilters(forTasks tasks: [Task]) -> [Report.Filter] {
@@ -104,7 +106,7 @@ extension Report.Filter {
       }
 
       if let module = filter.module, module.segment == nil {
-         let subsegments = Set(tasks.flatMap { $0.module.segment }).sorted()
+        let subsegments = Set(tasks.compactMap { $0.module.segment }).sorted()
 
          if !subsegments.isEmpty {
             let reports: [Report.Filter] = subsegments.map {
@@ -153,7 +155,7 @@ extension Report.Filter {
    }
 }
 
-extension Report.Filter : CustomDebugStringConvertible {
+extension Report.Filter {
    func canDescend() -> Bool {
       guard self.partition != nil else {
          return true
@@ -175,43 +177,46 @@ extension Report.Filter : CustomDebugStringConvertible {
       }
       return tasks
    }
-
-   public var description: String {
-      var description: [String] = ["Filter:"]
-
-      if let module = module {
-         let string = "(Module: \(module.name), segment: \(String(describing: module.segment)))" //ideally we could strip segment somewhat
-         description.append(string)
-      }
-
-      if let name = name {
-         description.append("name: \(name)")
-      }
-
-      if let partition = partition {
-         if let actualPartition = partition {
-            description.append("partition: \(actualPartition)")
-         }
-      }
-
-      if description.count == 1 {
-         description.append("(empty)")
-      }
-
-      return description.joined(separator: " ")
-   }
-
-   public var debugDescription: String {
-         return description
-   }
 }
+//
+//extension Report.Filter : Equatable {
+//   static func == (lhs:Report.Filter,rhs:Report.Filter) -> Bool {
+//      var equals = lhs.module == rhs.module && lhs.name == rhs.name
+//      if let arg0 = lhs.partition, let arg1 = rhs.partition {
+//         equals = equals || arg0 == arg1
+//      }
+//      return equals
+//   }
+//}
 
-extension Report.Filter : Equatable {
-   static func == (lhs:Report.Filter,rhs:Report.Filter) -> Bool {
-      var equals = lhs.module == rhs.module && lhs.name == rhs.name
-      if let arg0 = lhs.partition, let arg1 = rhs.partition {
-         equals = equals || arg0 == arg1
-      }
-      return equals
-   }
+extension Report.Filter : CustomStringConvertible, CustomDebugStringConvertible {
+
+    public var description: String {
+       var description: [String] = ["Filter:"]
+
+       if let module = module {
+          let string = "(Module: \(module.name), segment: \(String(describing: module.segment)))" //ideally we could strip segment somewhat
+          description.append(string)
+       }
+
+       if let name = name {
+          description.append("name: \(name)")
+       }
+
+       if let partition = partition {
+          if let actualPartition = partition {
+             description.append("partition: \(actualPartition)")
+          }
+       }
+
+       if description.count == 1 {
+          description.append("(empty)")
+       }
+
+       return description.joined(separator: " ")
+    }
+
+    public var debugDescription: String {
+          return description
+    }
 }

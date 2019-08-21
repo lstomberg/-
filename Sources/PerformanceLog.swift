@@ -24,9 +24,7 @@
 import Foundation
 import UIKit
 
-#if swift(>=3.2)
-   extension PerformanceLog.Data : Codable { }
-#endif
+extension PerformanceLog.Data : Codable { }
 
 public class PerformanceLog {
 
@@ -46,7 +44,7 @@ public class PerformanceLog {
    var data = Data()
 
    init() {
-      NotificationCenter.default.addObserver(self, selector: #selector(save), name: .UIApplicationWillResignActive, object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(save), name: UIApplication.willResignActiveNotification, object: nil)
    }
 
    deinit {
