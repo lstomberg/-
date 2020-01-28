@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		49A2102D1F1188150046778F /* PerformanceLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A2102C1F1188150046778F /* PerformanceLog.swift */; };
+		49A2102D1F1188150046778F /* PerformanceLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A2102C1F1188150046778F /* PerformanceLogger.swift */; };
 		49A210311F1188AE0046778F /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A210301F1188AE0046778F /* Task.swift */; };
-		49A210341F1189600046778F /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A210331F1189600046778F /* Report.swift */; };
+		49A210341F1189600046778F /* ResultTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A210331F1189600046778F /* ResultTree.swift */; };
 		49A363F0230DCBA6004F1444 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A363EF230DCBA6004F1444 /* Codable.swift */; };
 /* End PBXBuildFile section */
 
@@ -20,10 +20,10 @@
 		49353F701F138DA400C94F85 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		49353F711F138DA400C94F85 /* Test.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Test.xcconfig; sourceTree = "<group>"; };
 		4990612D1F14499C0002C6AF /* ReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTests.swift; sourceTree = "<group>"; };
-		49A2102C1F1188150046778F /* PerformanceLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceLog.swift; sourceTree = "<group>"; };
+		49A2102C1F1188150046778F /* PerformanceLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceLogger.swift; sourceTree = "<group>"; };
 		49A2102F1F1188550046778F /* Macros-ObjectiveC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Macros-ObjectiveC.h"; sourceTree = "<group>"; };
 		49A210301F1188AE0046778F /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		49A210331F1189600046778F /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		49A210331F1189600046778F /* ResultTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTree.swift; sourceTree = "<group>"; };
 		49A363EF230DCBA6004F1444 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		49A816F41F117F57000104B4 /* PerformanceTestKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PerformanceTestKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C96D4D1F1562600050BC4D /* TestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSupport.swift; sourceTree = "<group>"; };
@@ -76,8 +76,8 @@
 			children = (
 				49A363EE230DCB95004F1444 /* Extensions */,
 				49A210301F1188AE0046778F /* Task.swift */,
-				49A210331F1189600046778F /* Report.swift */,
-				49A2102C1F1188150046778F /* PerformanceLog.swift */,
+				49A210331F1189600046778F /* ResultTree.swift */,
+				49A2102C1F1188150046778F /* PerformanceLogger.swift */,
 				49E55CF81F1186AC006EAD66 /* PerformanceTestKit.h */,
 				49A2102F1F1188550046778F /* Macros-ObjectiveC.h */,
 			);
@@ -217,9 +217,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				49A210311F1188AE0046778F /* Task.swift in Sources */,
-				49A2102D1F1188150046778F /* PerformanceLog.swift in Sources */,
+				49A2102D1F1188150046778F /* PerformanceLogger.swift in Sources */,
 				49A363F0230DCBA6004F1444 /* Codable.swift in Sources */,
-				49A210341F1189600046778F /* Report.swift in Sources */,
+				49A210341F1189600046778F /* ResultTree.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

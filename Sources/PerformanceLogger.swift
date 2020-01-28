@@ -27,18 +27,17 @@ import UIKit
 //
 // MARK: Class definition
 //
-
 public class PerformanceLogger {
 
+    /// shared logger
     public static let `default` = PerformanceLogger()
 
     private var runningTasks: [String:Task] = [:]
     private let fileURL: URL
 
     private var results: [Result] = [] {
-        didSet {
-            save(results: results, to: fileURL)
-        }
+        // automatic serialization to disk
+        didSet { save(results: results, to: fileURL) }
     }
 
     init(to fileURL: URL) {
@@ -46,11 +45,8 @@ public class PerformanceLogger {
         self.results = loadResults(from: fileURL)
     }
 
-    convenience init(named name: String? = nil) {
-        let containerDir: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let name = name ?? "DefaultLogger"
-        let filePath: String = "\(containerDir)/\(name).plist"
-        let url: URL = URL(fileURLWithPath: filePath)
+    convenience init(named name: String = "DefaultLogger") {
+        let url = file(forLoggerNamed: name)
         self.init(to: url)
     }
 }
@@ -71,10 +67,18 @@ private func loadResults(from url: URL) -> [Result]  {
     return results
 }
 
+private func file(forLoggerNamed name: String) -> URL {
+    let containerDir: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+    let filePath: String = "\(containerDir)/\(name).plist"
+    let url: URL = URL(fileURLWithPath: filePath)
+    return url
+}
+
 //
-// MARK: Tasks
+// MARK: Tasks management
 //
 
+/// Opaque token for a task to be referenced externally
 public struct TaskIdentifier {
     fileprivate let key: String
 }
@@ -89,12 +93,13 @@ public extension PerformanceLogger {
         return TaskIdentifier(key: key)
     }
 
-    func end(task taskIdentifier: TaskIdentifier, partition: String? = nil) {
+    func end(task taskIdentifier: TaskIdentifier, additionalClassification: String = Result.NoAdditionalClassification) {
         guard let task: Task = self.runningTasks.removeValue(forKey: taskIdentifier.key) else {
-            print("\(taskIdentifier) already finished")
+            print("Unable to end task with identifier \(taskIdentifier.key).")
             return
         }
-        let result: Result = task.finish(partition)
+
+        let result: Result = task.finish(additionalClassification)
         self.results.append(result)
     }
 
@@ -105,9 +110,7 @@ public extension PerformanceLogger {
 //
 
 public extension PerformanceLogger {
-
-    func generateReport() -> Report {
-        return Report(results: self.results)
+    var currentReport: String {
+        return ResultTree(from: results).description
     }
-
 }

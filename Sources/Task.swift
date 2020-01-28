@@ -23,49 +23,73 @@
 
 import Foundation
 
-infix operator ∈: AdditionPrecedence
-
-public struct Module : Codable, Equatable {
+//
+// MARK: Activity
+//
+/// Defines the functional area running a task
+public struct Activity : Codable, Equatable {
     public let name: String
-    public let segment: String?
+    public let section: String
+
+    public init(name: String, section: String = Activity.NoSection) {
+        self.name = name
+        self.section = section
+    }
 }
 
+extension Activity {
+    public static let NoSection: String = "(none)"
+}
+
+//
+// MARK: TaskConfiguration
+//
+/// basic task definition + additional details
 public struct TaskConfiguration : Codable {
     public let name: String
-    public let module: Module
+    public let activity: Activity
     public let executionDetails: String?
+
+    public init(name: String, activity: Activity, executionDetails: String? = nil) {
+        self.name = name
+        self.activity = activity
+        self.executionDetails = executionDetails
+    }
 }
 
-public struct Task {
+
+//
+// MARK: Task
+//
+/// Running task
+internal struct Task {
     public let configuration: TaskConfiguration
     public let startTime: Date = Date()
 }
 
+//
+// MARK: Result
+//
+/// Result of a running task
 public struct Result : Codable {
     public let configuration: TaskConfiguration
     public let duration: TimeInterval
-    public let partition: String?
+    public let additionalClassification: String
 }
 
+extension Result {
+    public static let NoAdditionalClassification: String = "(none)"
+}
+
+//
+// MARK: Task -> Result
+//
 extension Task {
 
-    public func finish(_ partition: String? = nil) -> Result {
+    public func finish(_ classification: String = Result.NoAdditionalClassification) -> Result {
         let duration = Date().timeIntervalSince(self.startTime)
-        let result = Result(configuration: self.configuration, duration: duration, partition: partition)
+        let result = Result(configuration: self.configuration, duration: duration, additionalClassification: classification)
         return result
-    }
-
-}
-
-extension Module {
-
-    // swiftlint:disable identifier_name
-    static func ∈(lhs:Module, rhs:Module?) -> Bool {
-    // swiftlint:enable identifier_name
-         guard let rhs = rhs else {
-             return true
-         }
-         return (lhs.name == rhs.name && (rhs.segment == nil || lhs.segment == rhs.segment))
     }
 
 }
