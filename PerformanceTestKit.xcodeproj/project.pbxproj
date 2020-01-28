@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		497E6A6A23E040EB0069EC26 /* Macros-ObjectiveC.h in Headers */ = {isa = PBXBuildFile; fileRef = 49A2102F1F1188550046778F /* Macros-ObjectiveC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		497E6A6C23E0415B0069EC26 /* PerformanceTestKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 497E6A6B23E0415B0069EC26 /* PerformanceTestKit.m */; };
 		49A2102D1F1188150046778F /* PerformanceLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A2102C1F1188150046778F /* PerformanceLogger.swift */; };
 		49A210311F1188AE0046778F /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A210301F1188AE0046778F /* Task.swift */; };
 		49A210341F1189600046778F /* ResultTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A210331F1189600046778F /* ResultTree.swift */; };
@@ -19,6 +21,7 @@
 		49353F6F1F138DA400C94F85 /* Profile.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Profile.xcconfig; sourceTree = "<group>"; };
 		49353F701F138DA400C94F85 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		49353F711F138DA400C94F85 /* Test.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Test.xcconfig; sourceTree = "<group>"; };
+		497E6A6B23E0415B0069EC26 /* PerformanceTestKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PerformanceTestKit.m; sourceTree = "<group>"; };
 		4990612D1F14499C0002C6AF /* ReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTests.swift; sourceTree = "<group>"; };
 		49A2102C1F1188150046778F /* PerformanceLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceLogger.swift; sourceTree = "<group>"; };
 		49A2102F1F1188550046778F /* Macros-ObjectiveC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Macros-ObjectiveC.h"; sourceTree = "<group>"; };
@@ -79,6 +82,7 @@
 				49A210331F1189600046778F /* ResultTree.swift */,
 				49A2102C1F1188150046778F /* PerformanceLogger.swift */,
 				49E55CF81F1186AC006EAD66 /* PerformanceTestKit.h */,
+				497E6A6B23E0415B0069EC26 /* PerformanceTestKit.m */,
 				49A2102F1F1188550046778F /* Macros-ObjectiveC.h */,
 			);
 			path = Sources;
@@ -125,6 +129,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				497E6A6A23E040EB0069EC26 /* Macros-ObjectiveC.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,7 +167,7 @@
 				TargetAttributes = {
 					49A816F31F117F57000104B4 = {
 						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 1100;
+						LastSwiftMigration = 1130;
 					};
 				};
 			};
@@ -219,6 +224,7 @@
 				49A210311F1188AE0046778F /* Task.swift in Sources */,
 				49A2102D1F1188150046778F /* PerformanceLogger.swift in Sources */,
 				49A363F0230DCBA6004F1444 /* Codable.swift in Sources */,
+				497E6A6C23E0415B0069EC26 /* PerformanceTestKit.m in Sources */,
 				49A210341F1189600046778F /* ResultTree.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -298,6 +304,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/SupportingFiles/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -437,6 +444,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/SupportingFiles/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -463,6 +471,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/SupportingFiles/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

@@ -32,7 +32,7 @@ public class PerformanceLogger {
     /// shared logger
     public static let `default` = PerformanceLogger()
 
-    private var runningTasks: [String:Task] = [:]
+    private var runningTasks: [String: Task] = [:]
     private let fileURL: URL
 
     private var results: [Result] = [] {
@@ -88,7 +88,7 @@ public extension PerformanceLogger {
     // MARK: PUBLIC API
     func start(_ configuration: TaskConfiguration) -> TaskIdentifier {
         let task = Task(configuration: configuration)
-        let key =  UUID().uuidString
+        let key = UUID().uuidString
         self.runningTasks[key] = task
         return TaskIdentifier(key: key)
     }
@@ -112,5 +112,60 @@ public extension PerformanceLogger {
 public extension PerformanceLogger {
     var currentReport: String {
         return ResultTree(from: results).description
+    }
+}
+
+
+//
+// MARK: ObjC API
+//
+
+@objc(PTKObjCAPI)
+internal class ObjCAPI: NSObject {
+
+    // Keep this internal but copy what would be the generated interface to the ObjC
+    // source code included in this framework so it can access these APIs
+    @objc
+    public static func TICK(name: String, activity: String, section: String?) {
+        let section = section ?? Activity.NoSection
+        let activity = Activity(name: activity, section: section)
+        let task = TaskConfiguration(name: name, activity: activity)
+        let identifier = TaskIdentifier(activity: activity, name: name)
+        try? PerformanceLogger.default.start(task, identifier: identifier) // TODO: should probably expose exception to objc somehow
+    }
+
+    @objc
+    public static func TOCK(name: String, activity: String, section: String?, additionalClassification: String?) {
+        let section = section ?? Activity.NoSection
+        let activity = Activity(name: activity, section: section)
+        let identifier = TaskIdentifier(activity: activity, name: name)
+        let additionalClassification = additionalClassification ?? Result.NoAdditionalClassification
+        PerformanceLogger.default.end(task: identifier, additionalClassification: additionalClassification)
+    }
+}
+
+// convenience init for creating task identifier from activity/section/name strings
+fileprivate extension TaskIdentifier {
+    init(activity: Activity, name: String) {
+        self.key = "\(activity.name)_\(activity.section)_\(name)"
+    }
+}
+
+// private extension allowing external determination of identifier
+// used to allow ObjC interop without having to store identifiers everywhere
+fileprivate extension PerformanceLogger {
+
+    enum PerformanceLoggerError: Error {
+        case taskAlreadyRunning(message: String)
+    }
+
+    // private API for ObjC bridging
+    func start(_ configuration: TaskConfiguration, identifier: TaskIdentifier) throws {
+        guard self.runningTasks[identifier.key] == nil else {
+            throw PerformanceLoggerError.taskAlreadyRunning(message: "Duplicate task already started: \(identifier.key)")
+        }
+
+        let task = Task(configuration: configuration)
+        self.runningTasks[identifier.key] = task
     }
 }

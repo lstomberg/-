@@ -21,6 +21,7 @@
 //  SOFTWARE.
 //
 
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
 //! Project version number for PerformanceTestKit.
@@ -28,3 +29,11 @@ FOUNDATION_EXPORT double PerformanceTestKitVersionNumber;
 
 //! Project version string for PerformanceTestKit.
 FOUNDATION_EXPORT const unsigned char PerformanceTestKitVersionString[];
+
+NS_ASSUME_NONNULL_BEGIN
+
+static void TICK(NSString *name, NSString *activity,  NSString * _Nullable section);
+
+static void TOCK(NSString *name, NSString *activity, NSString * _Nullable section, NSString * _Nullable additionalClassifier);
+
+NS_ASSUME_NONNULL_END
