@@ -107,41 +107,47 @@ extension ResultTree.Activity.Section.Run.Partition: CustomStringConvertible {
 
         return [
             "Partition: \(self.name)",
-            "  Task count: \(count)",
-            "  Maximum: \(max)",
-            "  Average: \(average)",
-            "  Minimum: \(min)"
-        ].joined(separator: "\n")
+            "Task count: \(count)",
+            String(format:"Maximum: %.2f", max),
+            String(format:"Average: %.2f", average),
+            String(format:"Minimum: %.2f", min),
+        ].joined(separator: "\n  ")
     }
 }
 
 extension ResultTree.Activity.Section.Run: CustomStringConvertible {
     public var description: String {
         let partitionText = partitions.map { $0.description.replacingOccurrences(of: "\n", with: "\n  ") }.joined(separator: "\n")
+
+        // for a single partition, compact output by beginning text on same line as Run name
+        let lineSeparator = partitions.count == 1 ? "  " : "\n  "
         return [
             "Run: \(self.name)",
-            "  \(partitionText)"
-        ].joined(separator: "\n")
+            partitionText
+        ].joined(separator: lineSeparator)
     }
 }
 
 extension ResultTree.Activity.Section: CustomStringConvertible {
     public var description: String {
-        let runText = runs.map { $0.description.replacingOccurrences(of: "\n", with: "\n  ") }.joined(separator: "\n")
+        let runText = runs.map { $0.description.replacingOccurrences(of: "\n", with: "\n  ") }.joined(separator: "\n  ")
         return [
             "Section: \(self.name)",
-            "  \(runText)"
-        ].joined(separator: "\n")
+            runText
+        ].joined(separator: "\n  ")
     }
 }
 
 extension ResultTree.Activity: CustomStringConvertible {
     public var description: String {
-        let sectionText = sections.map { $0.description.replacingOccurrences(of: "\n", with: "\n  ") }.joined(separator: "\n")
+        let sectionText = sections.map { $0.description.replacingOccurrences(of: "\n", with: "\n  ") }.joined(separator: "\n  ")
+
+        // for a single section, compact output by beginning text on same line as Activity name
+        let lineSeparator = sections.count == 1 ? "  " : "\n  "
         return [
             "Activity: \(self.name)",
-            "  \(sectionText)"
-        ].joined(separator: "\n")
+            sectionText
+        ].joined(separator: lineSeparator)
     }
 }
 

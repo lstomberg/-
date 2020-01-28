@@ -126,10 +126,10 @@ internal class ObjCAPI: NSObject {
     // Keep this internal but copy what would be the generated interface to the ObjC
     // source code included in this framework so it can access these APIs
     @objc
-    public static func TICK(name: String, activity: String, section: String?) {
+    public static func TICK(name: String, activity: String, section: String?, executionDetails: String?) {
         let section = section ?? Activity.NoSection
         let activity = Activity(name: activity, section: section)
-        let task = TaskConfiguration(name: name, activity: activity)
+        let task = TaskConfiguration(name: name, activity: activity, executionDetails: executionDetails)
         let identifier = TaskIdentifier(activity: activity, name: name)
         try? PerformanceLogger.default.start(task, identifier: identifier) // TODO: should probably expose exception to objc somehow
     }
@@ -141,6 +141,11 @@ internal class ObjCAPI: NSObject {
         let identifier = TaskIdentifier(activity: activity, name: name)
         let additionalClassification = additionalClassification ?? Result.NoAdditionalClassification
         PerformanceLogger.default.end(task: identifier, additionalClassification: additionalClassification)
+    }
+
+    @objc
+    public static func performanceReport() -> String {
+        return PerformanceLogger.default.currentReport.description
     }
 }
 

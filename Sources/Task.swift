@@ -38,7 +38,7 @@ public struct Activity : Codable, Equatable {
 }
 
 extension Activity {
-    public static let NoSection: String = "(none)"
+    public static let NoSection: String = "(base)"
 }
 
 //
@@ -78,7 +78,7 @@ public struct Result : Codable {
 }
 
 extension Result {
-    public static let NoAdditionalClassification: String = "(none)"
+    public static let NoAdditionalClassification: String = "(base)"
 }
 
 //

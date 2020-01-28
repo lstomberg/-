@@ -20,7 +20,6 @@
 
 @import Foundation;
 
-#define PTKStandardExecutionDetails [NSString stringWithFormat:@"%s [%s:%i]",__PRETTY_FUNCTION__, __FILE__, __LINE__]
 
 
 //#define TICK(taskName,segmentName,moduleName) \

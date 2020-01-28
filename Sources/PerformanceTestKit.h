@@ -32,8 +32,19 @@ FOUNDATION_EXPORT const unsigned char PerformanceTestKitVersionString[];
 
 NS_ASSUME_NONNULL_BEGIN
 
-static void TICK(NSString *name, NSString *activity,  NSString * _Nullable section);
+typedef NSString *PTKTaskName;
+typedef NSString *PTKActivityName;
+typedef NSString *PTKSectionName;
 
-static void TOCK(NSString *name, NSString *activity, NSString * _Nullable section, NSString * _Nullable additionalClassifier);
+// start a timer
+static void TICK(PTKTaskName name, PTKActivityName activity,  PTKSectionName _Nullable section, NSString * _Nullable executionDetails);
+
+// end a timer
+static void TOCK(PTKTaskName name, PTKActivityName activity, PTKSectionName _Nullable section, NSString * _Nullable additionalClassifier);
+
+static NSString* NSStringReportFromPerformanceData(void);
+
+// use this for executionDetails to get line details
+#define PTKStandardExecutionDetails [NSString stringWithFormat:@"%s [%s:%i]",__PRETTY_FUNCTION__, __FILE__, __LINE__]
 
 NS_ASSUME_NONNULL_END
