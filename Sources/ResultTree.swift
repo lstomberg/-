@@ -117,7 +117,7 @@ extension ResultTree.Activity.Section.Run.Partition: CustomStringConvertible {
 
 extension ResultTree.Activity.Section.Run: CustomStringConvertible {
     public var description: String {
-        let partitionText = partitions.map { $0.description.replacingOccurrences(of: "\n", with: "\n  ") }.joined(separator: "\n")
+        let partitionText = partitions.map { $0.description.replacingOccurrences(of: "\n", with: "\n  ") }.joined(separator: "\n  ")
 
         // for a single partition, compact output by beginning text on same line as Run name
         let lineSeparator = partitions.count == 1 ? "  " : "\n  "

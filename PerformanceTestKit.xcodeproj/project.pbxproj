@@ -6,8 +6,25 @@
 	objectVersion = 48;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		493CE0E923E0C47F00537031 /* PerformanceTestKit-XCFramework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 493CE0EA23E0C47F00537031 /* Build configuration list for PBXAggregateTarget "PerformanceTestKit-XCFramework" */;
+			buildPhases = (
+				493CE0EE23E0C48800537031 /* Run Script - Clean build folder */,
+				493CE0EF23E0C50C00537031 /* Run Script - Build iOS device */,
+				493CE0F023E0C50E00537031 /* Run Script - Build iOS simulator */,
+				493CE0F123E0C50F00537031 /* Run Script - Build XCFramework */,
+			);
+			dependencies = (
+			);
+			name = "PerformanceTestKit-XCFramework";
+			productName = "PerformanceTestKit-XCFramework";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
-		497E6A6A23E040EB0069EC26 /* Macros-ObjectiveC.h in Headers */ = {isa = PBXBuildFile; fileRef = 49A2102F1F1188550046778F /* Macros-ObjectiveC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		493CE0E323E0B99100537031 /* PerformanceTestKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 49E55CF81F1186AC006EAD66 /* PerformanceTestKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		497E6A6C23E0415B0069EC26 /* PerformanceTestKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 497E6A6B23E0415B0069EC26 /* PerformanceTestKit.m */; };
 		49A2102D1F1188150046778F /* PerformanceLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A2102C1F1188150046778F /* PerformanceLogger.swift */; };
 		49A210311F1188AE0046778F /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A210301F1188AE0046778F /* Task.swift */; };
@@ -24,7 +41,6 @@
 		497E6A6B23E0415B0069EC26 /* PerformanceTestKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PerformanceTestKit.m; sourceTree = "<group>"; };
 		4990612D1F14499C0002C6AF /* ReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTests.swift; sourceTree = "<group>"; };
 		49A2102C1F1188150046778F /* PerformanceLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceLogger.swift; sourceTree = "<group>"; };
-		49A2102F1F1188550046778F /* Macros-ObjectiveC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Macros-ObjectiveC.h"; sourceTree = "<group>"; };
 		49A210301F1188AE0046778F /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		49A210331F1189600046778F /* ResultTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTree.swift; sourceTree = "<group>"; };
 		49A363EF230DCBA6004F1444 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
@@ -83,7 +99,6 @@
 				49A2102C1F1188150046778F /* PerformanceLogger.swift */,
 				49E55CF81F1186AC006EAD66 /* PerformanceTestKit.h */,
 				497E6A6B23E0415B0069EC26 /* PerformanceTestKit.m */,
-				49A2102F1F1188550046778F /* Macros-ObjectiveC.h */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -129,7 +144,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				497E6A6A23E040EB0069EC26 /* Macros-ObjectiveC.h in Headers */,
+				493CE0E323E0B99100537031 /* PerformanceTestKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +180,10 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Lucas Stomberg";
 				TargetAttributes = {
+					493CE0E923E0C47F00537031 = {
+						CreatedOnToolsVersion = 11.3.1;
+						ProvisioningStyle = Automatic;
+					};
 					49A816F31F117F57000104B4 = {
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 1130;
@@ -185,6 +204,7 @@
 			projectRoot = "";
 			targets = (
 				49A816F31F117F57000104B4 /* PerformanceTestKit */,
+				493CE0E923E0C47F00537031 /* PerformanceTestKit-XCFramework */,
 			);
 		};
 /* End PBXProject section */
@@ -200,6 +220,78 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		493CE0EE23E0C48800537031 /* Run Script - Clean build folder */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - Clean build folder";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nrm -rf \"${BUILD_DIR}\"\n";
+		};
+		493CE0EF23E0C50C00537031 /* Run Script - Build iOS device */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - Build iOS device";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nxcodebuild archive -scheme PerformanceTestKit -archivePath \"${BUILD_DIR}/ios.xcarchive\" -sdk iphoneos SKIP_INSTALL=NO\n";
+		};
+		493CE0F023E0C50E00537031 /* Run Script - Build iOS simulator */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - Build iOS simulator";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nxcodebuild archive -scheme PerformanceTestKit -archivePath \"${BUILD_DIR}/ios_sim.xcarchive\" -sdk iphonesimulator SKIP_INSTALL=NO\n";
+		};
+		493CE0F123E0C50F00537031 /* Run Script - Build XCFramework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - Build XCFramework";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nxcodebuild -create-xcframework \\\n-framework \"${BUILD_DIR}/ios.xcarchive/Products/Library/Frameworks/PerformanceTestKit.framework\" \\\n-framework \"${BUILD_DIR}/ios_sim.xcarchive/Products/Library/Frameworks/PerformanceTestKit.framework\" \\\n-output \"${BUILD_DIR}/PerformanceTestKit.xcframework\"\n\n# copy bcsymbolmap\nfind \"${BUILD_DIR}/ios.xcarchive\" -type f -name '*.bcsymbolmap' | xargs -I% mv \"%\" \"${BUILD_DIR}/PerformanceTestKit.xcframework/ios-armv7_arm64/\"\n\n# copy dSYM\nfind \"${BUILD_DIR}/ios.xcarchive\" -type d -name '*.dSYM' | xargs -I% mv \"%\" \"${BUILD_DIR}/PerformanceTestKit.xcframework/ios-armv7_arm64/\"\n\n# copy dSYM\nfind \"${BUILD_DIR}/ios_sim.xcarchive\" -type d -name '*.dSYM' | xargs -I% mv \"%\" \"${BUILD_DIR}/PerformanceTestKit.xcframework/ios-i386_x86_64-simulator/\"\n";
+		};
 		49E5A4171F177E5F00534235 /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -286,7 +378,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -297,6 +389,7 @@
 			baseConfigurationReference = 49353F6F1F138DA400C94F85 /* Profile.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
@@ -310,7 +403,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lucasstomberg.PerformanceTestKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
@@ -318,6 +411,33 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Profile;
+		};
+		493CE0EB23E0C47F00537031 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9EPD44Q626;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		493CE0EC23E0C47F00537031 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9EPD44Q626;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Profile;
+		};
+		493CE0ED23E0C47F00537031 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9EPD44Q626;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
 		};
 		49A817061F117F57000104B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -373,7 +493,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -425,7 +545,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -437,6 +557,7 @@
 			baseConfigurationReference = 49353F6E1F138DA400C94F85 /* Debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
@@ -450,7 +571,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lucasstomberg.PerformanceTestKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
@@ -464,6 +585,7 @@
 			baseConfigurationReference = 49353F701F138DA400C94F85 /* Release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
@@ -477,7 +599,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lucasstomberg.PerformanceTestKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 5.0;
@@ -488,6 +610,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		493CE0EA23E0C47F00537031 /* Build configuration list for PBXAggregateTarget "PerformanceTestKit-XCFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				493CE0EB23E0C47F00537031 /* Debug */,
+				493CE0EC23E0C47F00537031 /* Profile */,
+				493CE0ED23E0C47F00537031 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		49A816EE1F117F57000104B4 /* Build configuration list for PBXProject "PerformanceTestKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

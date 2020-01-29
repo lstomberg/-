@@ -30,21 +30,24 @@ FOUNDATION_EXPORT double PerformanceTestKitVersionNumber;
 //! Project version string for PerformanceTestKit.
 FOUNDATION_EXPORT const unsigned char PerformanceTestKitVersionString[];
 
-NS_ASSUME_NONNULL_BEGIN
-
-typedef NSString *PTKTaskName;
-typedef NSString *PTKActivityName;
-typedef NSString *PTKSectionName;
-
-// start a timer
-static void TICK(PTKTaskName name, PTKActivityName activity,  PTKSectionName _Nullable section, NSString * _Nullable executionDetails);
-
-// end a timer
-static void TOCK(PTKTaskName name, PTKActivityName activity, PTKSectionName _Nullable section, NSString * _Nullable additionalClassifier);
-
-static NSString* NSStringReportFromPerformanceData(void);
-
-// use this for executionDetails to get line details
+//
+// Macros
+//
 #define PTKStandardExecutionDetails [NSString stringWithFormat:@"%s [%s:%i]",__PRETTY_FUNCTION__, __FILE__, __LINE__]
 
-NS_ASSUME_NONNULL_END
+#define TICK(taskName,activityName,sectionName) \
+    _PTKTICK(@"" # taskName, @"" # activityName, @"" # sectionName, PTKStandardExecutionDetails)
+
+#define TOCK(taskName,activityName,sectionName,classifier) \
+    _PTKTOCK(@"" # taskName, @"" # activityName, @"" # sectionName, @"" # classifier)
+
+//
+// PRIVATE APIs
+//
+void _PTKTICK(NSString *_Nonnull name, NSString *_Nonnull activity, NSString *_Nullable section, NSString *_Nullable executionDetails);
+void _PTKTOCK(NSString *_Nonnull name, NSString *_Nonnull activity, NSString *_Nullable section, NSString *_Nullable additionalClassifier);
+
+//
+// REPORT
+//
+NSString *_Nonnull NSStringReportFromPerformanceData(void);
