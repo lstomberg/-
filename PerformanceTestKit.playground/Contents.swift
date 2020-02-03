@@ -21,37 +21,34 @@
 //  SOFTWARE.
 //
 
+import Foundation
 import UIKit
 import PlaygroundSupport
 import PerformanceTestKit
 
-#if swift(>=3.2)
-//swift 4 allows tests to access internal data and functions.  Swift 3.2 does not
-let name="Store"
-let module = Module(name:"Lucas",segment:"none")
+let loginActivity = Activity(name: "Infrastructure", section: "Login")
 
-try? PerformanceLog.default.startTask(named: name, inModule: module)
-try? PerformanceLog.default.endTask(inModule: module, named: name, storingParition: "3")
+let departmentTask = TaskConfiguration(name: "SetDepartment", activity: loginActivity)
+let departmentTaskId = PerformanceLogger.default.start(departmentTask)
+Thread.sleep(forTimeInterval: 0.5)
+PerformanceLogger.default.end(task: departmentTaskId)
 
-try? PerformanceLog.default.startTask(named: name, inModule: module)
-try? PerformanceLog.default.endTask(inModule: module, named: name, storingParition: "6")
+let downloadI18NTask = TaskConfiguration(name: "DownloadI18N", activity: loginActivity)
+let downloadI18NTaskId = PerformanceLogger.default.start(downloadI18NTask)
+Thread.sleep(forTimeInterval: 0.75)
+PerformanceLogger.default.end(task: downloadI18NTaskId)
 
-try? PerformanceLog.default.startTask(named: name, inModule: Module(name:"James",segment:nil))
-try? PerformanceLog.default.endTask(inModule: Module(name:"James",segment:nil), named: name, storingParition: "13")
+let scheduleActivity = Activity(name: "Schedule")
+let loadScheduleTask = TaskConfiguration(name: "Load", activity: scheduleActivity)
+let loadScheduleTaskId = PerformanceLogger.default.start(loadScheduleTask)
+Thread.sleep(forTimeInterval: 0.2)
+PerformanceLogger.default.end(task: loadScheduleTaskId)
 
-try? PerformanceLog.default.startTask(named: name, inModule: Module(name:"Lucas",segment:nil))
-try? PerformanceLog.default.endTask(inModule: Module(name:"Lucas",segment:nil), named: name, storingParition: "18")
+let tomorrowScheduleActivity = Activity(name: "Schedule", section: "Tomorrow")
+let loadTomorrowTask = TaskConfiguration(name: "Load", activity: tomorrowScheduleActivity)
+let loadTomorrowTaskId = PerformanceLogger.default.start(loadTomorrowTask)
+Thread.sleep(forTimeInterval: 0.1)
+PerformanceLogger.default.end(task: loadTomorrowTaskId)
 
-try? PerformanceLog.default.startTask(named: name+"a", inModule: Module(name:"Lucas",segment:nil))
-try? PerformanceLog.default.endTask(inModule: Module(name:"Lucas"), named: name+"a", storingParition: "18")
-
-PerformanceLog.default.data.completedTasks
-let report = PerformanceLog.default.report()
-
-report.tasks
-report.inModule
-
-let desc = report.debugDescription
-print(desc)
-
-#endif
+let report = PerformanceLogger.default.currentReport
+print(report)

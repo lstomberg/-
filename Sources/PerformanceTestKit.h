@@ -21,6 +21,7 @@
 //  SOFTWARE.
 //
 
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
 //! Project version number for PerformanceTestKit.
@@ -28,3 +29,25 @@ FOUNDATION_EXPORT double PerformanceTestKitVersionNumber;
 
 //! Project version string for PerformanceTestKit.
 FOUNDATION_EXPORT const unsigned char PerformanceTestKitVersionString[];
+
+//
+// Macros
+//
+#define PTKStandardExecutionDetails [NSString stringWithFormat:@"%s [%s:%i]",__PRETTY_FUNCTION__, __FILE__, __LINE__]
+
+#define TICK(taskName,activityName,sectionName) \
+    _PTKTICK(@"" # taskName, @"" # activityName, @"" # sectionName, PTKStandardExecutionDetails)
+
+#define TOCK(taskName,activityName,sectionName,classifier) \
+    _PTKTOCK(@"" # taskName, @"" # activityName, @"" # sectionName, @"" # classifier)
+
+//
+// PRIVATE APIs
+//
+void _PTKTICK(NSString *_Nonnull name, NSString *_Nonnull activity, NSString *_Nullable section, NSString *_Nullable executionDetails);
+void _PTKTOCK(NSString *_Nonnull name, NSString *_Nonnull activity, NSString *_Nullable section, NSString *_Nullable additionalClassifier);
+
+//
+// REPORT
+//
+NSString *_Nonnull NSStringReportFromPerformanceData(void);

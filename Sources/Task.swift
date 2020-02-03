@@ -23,98 +23,73 @@
 
 import Foundation
 
-infix operator ∈: AdditionPrecedence
+//
+// MARK: Activity
+//
+/// Defines the functional area running a task
+public struct Activity : Codable, Equatable {
+    public let name: String
+    public let section: String
 
-#if swift(>=3.2)
-   extension Module : Codable { }
-   extension Task : Codable { }
-   extension Task.Result : Codable { }
-#endif
-
-public struct Module : Hashable {
-
-   let name: String
-   let segment: String?
-
-   public static func == (lhs:Module, rhs:Module) -> Bool {
-      return lhs.name == rhs.name && lhs.segment == rhs.segment
-   }
-
-   public var hashValue: Int {
-      return name.hashValue ^ (segment?.hashValue ?? 0)
-   }
-   // swiftlint:disable identifier_name
-   static func ∈(lhs:Module, rhs:Module?) -> Bool {
-   // swiftlint:enable identifier_name
-      guard let rhs = rhs else {
-         return true
-      }
-      return (lhs.name == rhs.name && (rhs.segment == nil || lhs.segment == rhs.segment))
-   }
-
-   public init(name: String, segment: String? = nil) {
-      self.name = name
-      self.segment = segment
-   }
+    public init(name: String, section: String = Activity.NoSection) {
+        self.name = name
+        self.section = section
+    }
 }
 
-struct Task : Hashable {
-   struct Result : Equatable {
-      let duration: TimeInterval
-
-      public static func == (lhs:Task.Result, rhs:Task.Result) -> Bool {
-         return lhs.duration == rhs.duration
-      }
-   }
-
-   let name:String
-   let module:Module
-   let executionDetails: String?
-   let startTime:Date
-
-   let partition:String?
-   let results: Result?
-
-   public static func == (lhs:Task, rhs:Task) -> Bool {
-      return lhs.name == rhs.name
-         && lhs.module == rhs.module
-         && lhs.executionDetails == rhs.executionDetails
-         && lhs.partition == rhs.partition
-         && lhs.results == rhs.results
-   }
-
-   public var hashValue: Int {
-      var hashValue = name.hashValue ^ module.hashValue ^ startTime.hashValue
-      if let executionDetails = executionDetails {
-         hashValue ^= executionDetails.hashValue
-      }
-      if let partition = partition {
-         hashValue ^= partition.hashValue
-      }
-      if let results = results {
-         hashValue ^= results.duration.hashValue
-      }
-      return hashValue
-   }
+extension Activity {
+    public static let NoSection: String = "(base)"
 }
 
+//
+// MARK: TaskConfiguration
+//
+/// basic task definition + additional details
+public struct TaskConfiguration : Codable {
+    public let name: String
+    public let activity: Activity
+    public let executionDetails: String?
+
+    public init(name: String, activity: Activity, executionDetails: String? = nil) {
+        self.name = name
+        self.activity = activity
+        self.executionDetails = executionDetails
+    }
+}
+
+
+//
+// MARK: Task
+//
+/// Running task
+internal struct Task {
+    public let configuration: TaskConfiguration
+    public let startTime: Date = Date()
+}
+
+//
+// MARK: Result
+//
+/// Result of a running task
+public struct Result : Codable {
+    public let configuration: TaskConfiguration
+    public let duration: TimeInterval
+    public let additionalClassification: String
+}
+
+extension Result {
+    public static let NoAdditionalClassification: String = "(base)"
+}
+
+//
+// MARK: Task -> Result
+//
 extension Task {
 
-   init(named:String, in module:Module, executionDetails: String? = nil, partition: String? = nil, result: Result? = nil) {
-      self.init(name: named, module: module, executionDetails: executionDetails, startTime: Date(), partition: partition, results: result)
-   }
+    public func finish(_ classification: String = Result.NoAdditionalClassification) -> Result {
+        let duration = Date().timeIntervalSince(self.startTime)
+        let result = Result(configuration: self.configuration, duration: duration, additionalClassification: classification)
+        return result
+    }
 
-   func complete(partition: String?) -> Task {
-      let result = Result(duration: Date().timeIntervalSince(startTime))
-      return Task(named: name, in: module, executionDetails: executionDetails, partition: partition, result: result)
-   }
-}
-
-extension Array where Element == Task {
-
-   mutating func remove(taskIn module: Module, named name:String) -> [Task] {
-      let removed = self.filter { $0.module == module && $0.name == name }
-      self = self.filter { !($0.module == module && $0.name == name) }
-      return removed
-   }
 }

@@ -60,3 +60,5 @@ iOSInjectionProject/
 
 # Remove R.swift generated file
 **/R.generated.swift
+xcshareddata
+xcuserdata
